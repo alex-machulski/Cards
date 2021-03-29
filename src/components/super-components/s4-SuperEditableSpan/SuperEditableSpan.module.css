@@ -1,0 +1,8 @@
+.editableSpan {
+    margin-left: 5px;
+    color: black;
+}
+
+span.editableSpan img {
+    margin-left: 10px;
+}

@@ -1,0 +1,18 @@
+.checkbox {
+    position: absolute;
+    left: -9999px;
+}
+
+.checkbox + label {
+    background: url(checkbox-sprite.gif) 0 4px no-repeat;
+    padding-left: 20px;
+}
+
+.checkbox:checked + label {
+    background-position: 0 -28px;
+}
+
+.spanClassName {
+    color: blue;
+}
+

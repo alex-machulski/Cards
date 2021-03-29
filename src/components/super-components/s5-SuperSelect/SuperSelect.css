@@ -1,0 +1,17 @@
+select {
+    min-width: 120px;
+    min-height: 20px;
+    text-align: center;
+    border: 3px solid blue;
+    margin: 5px;
+    border-radius: 3px;
+}
+
+select:focus {
+    border: 3px solid red;
+}
+
+option {
+    background-color: white;
+    color: dodgerblue;
+}
