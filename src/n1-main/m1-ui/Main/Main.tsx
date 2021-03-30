@@ -1,6 +1,6 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
-import {ENTER_PASS_PATH, ERROR_404_PATH, LOGIN_PATH, PROFILE_PATH, REGISTER_PATH, RESTORE_PASS_PATH, TEST_PAGE_PATH } from "../../../App";
+import {ENTER_PASS_PATH, LOGIN_PATH, PROFILE_PATH, REGISTER_PATH, RESTORE_PASS_PATH, TEST_PAGE_PATH } from "../../../App";
 import styles from './Main.module.css';
 
 export const Main = () => {
@@ -10,7 +10,6 @@ export const Main = () => {
             <NavLink className={styles.navBlock} to={LOGIN_PATH}>Login</NavLink>
             <NavLink className={styles.navBlock} to={REGISTER_PATH}>Register</NavLink>
             <NavLink className={styles.navBlock} to={PROFILE_PATH}>Profile</NavLink>
-            <NavLink className={styles.navBlock} to={ERROR_404_PATH}>Error 404</NavLink>
             <NavLink className={styles.navBlock} to={RESTORE_PASS_PATH}>Restore Password</NavLink>
             <NavLink className={styles.navBlock} to={ENTER_PASS_PATH}>Enter Password</NavLink>
             <NavLink className={styles.navBlock} to={TEST_PAGE_PATH}>Test Page</NavLink>
