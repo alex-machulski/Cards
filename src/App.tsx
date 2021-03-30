@@ -10,6 +10,14 @@ import {EnterPassword} from "./n2-features/f4-password/EnterPassword";
 import {Main} from "./n1-main/m1-ui/Main/Main";
 import {TestPage} from "./n2-features/f0-test/TestPage";
 
+export const LOGIN_PATH = "/login";
+export const REGISTER_PATH = "/register";
+export const PROFILE_PATH = "/profile";
+export const ERROR_404_PATH = "/404";
+export const RESTORE_PASS_PATH = "/restore-pass";
+export const ENTER_PASS_PATH = "/enter-pass";
+export const TEST_PAGE_PATH = "/test";
+
 function App() {
     return (
         <div className="App">
@@ -17,14 +25,13 @@ function App() {
             <Main/>
             <div>
                 {/*<Header/>*/}
-                {/*<Main/>*/}
-                <Route path={"/login"} render={() => <Login/>}/>
-                <Route path={"/register"} render={() => <Register/>}/>
-                <Route path={"/profile"} render={() => <Profile/>}/>
-                <Route path={"/404"} render={() => <Error404/>}/>
-                <Route path={"/restore-pass"} render={() => <RestorePassword/>}/>
-                <Route path={"/enter-pass"} render={() => <EnterPassword/>}/>
-                <Route path={"/test"} render={() => <TestPage/>}/>
+                <Route path={LOGIN_PATH} render={() => <Login/>}/>
+                <Route path={REGISTER_PATH} render={() => <Register/>}/>
+                <Route path={PROFILE_PATH} render={() => <Profile/>}/>
+                <Route path={ERROR_404_PATH} render={() => <Error404/>}/>
+                <Route path={RESTORE_PASS_PATH} render={() => <RestorePassword/>}/>
+                <Route path={ENTER_PASS_PATH} render={() => <EnterPassword/>}/>
+                <Route path={TEST_PAGE_PATH} render={() => <TestPage/>}/>
             </div>
         </div>
     );
