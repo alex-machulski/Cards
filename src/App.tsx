@@ -23,7 +23,7 @@ function App() {
             {/*//hr provider*/}
             <Main/>
             <div>
-                {/*<Header/>*/}
+                {/*<Header Nikolai's branch/>*/}
                 <Switch>
                     <Route exact path={"/"} render={() => <Profile/>}/>
                     <Route path={LOGIN_PATH} render={() => <Login/>}/>
