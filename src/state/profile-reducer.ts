@@ -3,13 +3,13 @@ const initialState = {
 }
 type InitialStateType = typeof initialState
 
-export const profileReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
+export const profileReducer = (state: InitialStateType = initialState, action: ProfileReducerActionsType): InitialStateType => {
     switch (action.type) {
         default:
             return state
     }
 }
 
-type ActionsType = {
+export type ProfileReducerActionsType = {
     type: ""
 }

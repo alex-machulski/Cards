@@ -1,16 +1,26 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import {authReducer} from "./auth-reducer";
+import {loginReducer, LoginReducerActionsType} from "./login-reducer";
 import thunk from "redux-thunk";
-import {profileReducer} from "./profile-reducer";
+import {profileReducer, ProfileReducerActionsType} from "./profile-reducer";
+import {registerReducer, RegisterReducerActionsType} from "./register-reducer";
+import {recoverReducer, RecoverReducerActionsType} from "./recover-reducer";
 
 const rootReducer = combineReducers({
-    auth: authReducer,
+    login: loginReducer,
+    register: registerReducer,
+    recover: recoverReducer,
     profile: profileReducer
 })
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
 
 export const store = createStore(rootReducer, applyMiddleware(thunk));
+
+export type ActionsType =
+    LoginReducerActionsType |
+    RegisterReducerActionsType |
+    RecoverReducerActionsType |
+    ProfileReducerActionsType
 
 // @ts-ignore
 window.store = store;
