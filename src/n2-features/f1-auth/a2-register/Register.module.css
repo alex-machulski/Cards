@@ -1,0 +1,10 @@
+.registerBlock {
+    position: relative;
+    text-align: center;
+}
+
+.inputElement {
+    margin: 5px;
+    min-height: 45px;
+}
+
