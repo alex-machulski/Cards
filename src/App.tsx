@@ -17,10 +17,10 @@ export const RESTORE_PASS_PATH = "/restore-pass";
 export const ENTER_PASS_PATH = "/enter-pass";
 export const TEST_PAGE_PATH = "/test";
 
-function App() {
+const App = () => {
     return (
         <div className="App">
-            {/*//hr provider*/}
+
             <Main/>
             <div>
                 {/*<Header Nikolai's branch/>*/}
