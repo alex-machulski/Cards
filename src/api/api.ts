@@ -7,6 +7,7 @@ const instance = axios.create({
     baseURL: `http://localhost:7542/2.0/`,
     // на удаленный сервер хероку
     // baseURL: `https://neko-back.herokuapp.com/2.0`,
+    //  на будущее, если будет необходимо что-то еще передать!
     headers: {}
 })
 
