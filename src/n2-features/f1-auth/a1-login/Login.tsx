@@ -1,59 +1,69 @@
 import {Field, Form, Formik, FormikHelpers} from "formik";
 import React, {useEffect} from "react";
-import {useDispatch} from "react-redux";
-import {login, logout} from "../../../state/login-reducer";
+import {useDispatch, useSelector} from "react-redux";
+import { Redirect } from "react-router-dom";
+import {getAuthUserData, login} from "../../../state/login-reducer";
+import {AppRootStateType} from "../../../state/store";
+import {PROFILE_PATH} from "../../../App";
 
 interface Values {
     email: string,
     password: string,
-    rememberMe:boolean
+    rememberMe: boolean
 }
 
 export const Login = () => {
-// const loginData=useSelector(state:AppRootStateType=>)
+    const isLoggedIn: boolean = useSelector((state: AppRootStateType) => state.login.isLoggedIn)
     const dispatch = useDispatch()
 
-    useEffect(()=>{
-        // dispatch(login("nya-admin@nya.nya",  "1qazxcvBG", false))
-        dispatch(logout())
-    })
+    useEffect(() => {
+        dispatch(getAuthUserData())
+    },[])
+
+    const formikOnSubmit = (values: Values, {setSubmitting}: FormikHelpers<Values>) => {
+        dispatch(login(values.email, values.password, values.rememberMe))
+return
+
+    }
+    if (isLoggedIn){
+        return <Redirect to={PROFILE_PATH}/>
+    }
+
     return (
         <div>
-            <h1>Login</h1>
-            <Formik
+                <h1>Login</h1>
+                <Formik
                 initialValues={{
-                    email: "",
-                    password: "",
-                    rememberMe:false
-                }}
-                onSubmit={(
-                    values: Values,
-                    { setSubmitting }: FormikHelpers<Values>
-                ) => {
-                    setTimeout(() => {
-                        alert(JSON.stringify(values, null, 2));
-                        setSubmitting(false);
-                    }, 500);
-                }}
-            >
+                email: "",
+                password: "",
+                rememberMe: false
+            }}
+                onSubmit={formikOnSubmit}
+                >
                 <Form>
-                    <label htmlFor="firstName">First Name</label>
-                    <Field id="firstName" name="firstName" placeholder="John" />
+                <label htmlFor="email">Email</label>
+                <Field
+                id="email"
+                name="email"
+                placeholder="email"
+                type="email"
+                />
+                <label htmlFor="password">Password</label>
+                <Field
+                id="password"
+                name="password"
+                placeholder="password"
+                type="password"
+                />
+                <Field
+                id="rememberMe"
+                name="rememberMe"
+                type="checkbox"
+                />
 
-                    <label htmlFor="lastName">Last Name</label>
-                    <Field id="lastName" name="lastName" placeholder="Doe" />
-
-                    <label htmlFor="email">Email</label>
-                    <Field
-                        id="email"
-                        name="email"
-                        placeholder="john@acme.com"
-                        type="email"
-                    />
-
-                    <button type="submit">Submit</button>
+                <button type="submit">Submit</button>
                 </Form>
-            </Formik>
-        </div>
+                </Formik>
+            </div>
     )
 }
