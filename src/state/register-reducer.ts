@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
 import {ActionsType} from "./store";
 import {authAPI} from "../api/api";
+import {setIsAppLoadingAC} from "./app-reducer";
 
 const SET_REGISTER_SUCCESS = "register/SET_REGISTER_SUCCESS";
 const CLEAR_REGISTER_STATUS = "register/CLEAR_REGISTER_STATUS";
@@ -27,8 +28,8 @@ export const registerReducer = (state: InitialStateType = initialState, action: 
     }
 }
 
-
 export const registerTC = (email: string, password: string) => (dispatch: Dispatch<ActionsType>) => {
+    dispatch(setIsAppLoadingAC(true));
     authAPI.register(email, password)
         .then(res => {
             if (!res.data.error) {
@@ -37,6 +38,9 @@ export const registerTC = (email: string, password: string) => (dispatch: Dispat
         })
         .catch(err => {
             dispatch(setRegisterErrorAC(err.response.data.error));
+        })
+        .finally(() => {
+            setIsAppLoadingAC(false);
         })
 }
 

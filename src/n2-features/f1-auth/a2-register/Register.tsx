@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import s from './Register.module.css';
 import {useFormik} from "formik";
 import {useDispatch, useSelector} from "react-redux";
@@ -9,13 +9,10 @@ import {LOGIN_PATH} from "../../../App";
 
 export const Register = () => {
 
-    useEffect(() => {
-
-    }, [])
-
     const dispatch = useDispatch();
     const isRegisterSuccess = useSelector<AppRootStateType, boolean>(state => state.register.isRegistrationSuccess)
     const registerError = useSelector<AppRootStateType, null | string>(state => state.register.registerError)
+    const isAppLoading = useSelector<AppRootStateType, boolean>(state => state.app.isAppLoading)
 
     type FormikErrorType = {
         email?: string
@@ -87,11 +84,12 @@ export const Register = () => {
                         <div style={{color: 'red'}}>{formik.errors.repeatPassword}</div> : null}
                 </div>
                 <div>
-                    <button type={"submit"}>Register</button>
+                    <button type={"submit"} disabled={isAppLoading}>Register</button>
                 </div>
                 <div style={{color: 'red'}}>
                     {registerError}
                 </div>
+                {isAppLoading && <div><h2>Loading...</h2></div>}
             </form>
         </div>
     )

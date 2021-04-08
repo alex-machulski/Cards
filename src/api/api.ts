@@ -6,7 +6,7 @@ const instance = axios.create({
     // путь на локальный сервер
     baseURL: `http://localhost:7542/2.0/`,
     // на удаленный сервер хероку
-    // baseURL: `https://neko-back.herokuapp.com/2.0`,
+    // baseURL: `https://neko-back.herokuapp.com/2.0/`,
     headers: {}
 })
 
@@ -16,16 +16,17 @@ export const authAPI = {
     me() {
         return instance.post<MeResponseType>(`/auth/me`, {})
     },
-
     login(email: string, password: string, rememberMe: boolean = false) {
         return instance.post<LoginResponseType>(`/auth/login`, {email, password, rememberMe})
     },
-
     logout() {
         return instance.delete<LogoutResponseType>(`/auth/me`, {})
     },
     register(email: string, password: string) {
         return instance.post<RegisterResponseType>('auth/register', {email: email, password: password});
+    },
+    recoverPassword(email: string) {
+        return instance.post('auth/forgot', {email})
     }
 }
 
@@ -69,3 +70,4 @@ type LogoutResponseType = {
 type RegisterResponseType = {
     error?: string
 }
+
