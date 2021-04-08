@@ -13,6 +13,7 @@ const instance = axios.create({
 
 
 export const authAPI = {
+    // проверка на залогиненность
     me() {
         return instance.post<MeResponseType>(`/auth/me`, {})
     },
