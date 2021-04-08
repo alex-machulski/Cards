@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 // экземпляр axios , в котором указываются общие свойства
 const instance = axios.create({
     withCredentials: true, // разрешить запрос на другие серверы
@@ -24,8 +23,13 @@ export const authAPI = {
 
     logout() {
         return instance.delete<LogoutResponseType>(`/auth/me`, {})
+    },
+    register(email: string, password: string) {
+        return instance.post<RegisterResponseType>('auth/register', {email: email, password: password});
     }
 }
+
+//types
 export type MeResponseType = {
     token: string
     tokenDeathTime: number
@@ -60,4 +64,8 @@ type LoginResponseType = {
 type LogoutResponseType = {
     info: string
     error: string
+}
+
+type RegisterResponseType = {
+    error?: string
 }

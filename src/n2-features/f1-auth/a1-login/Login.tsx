@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import {getAuthUserData, login} from "../../../state/login-reducer";
 import {AppRootStateType} from "../../../state/store";
 import {PROFILE_PATH} from "../../../App";
+import {clearRegisterStatusAC} from "../../../state/register-reducer";
 
 interface Values {
     email: string,
@@ -18,6 +19,7 @@ export const Login = () => {
 
     useEffect(() => {
         dispatch(getAuthUserData())
+        dispatch(clearRegisterStatusAC());
     },[])
 
     const formikOnSubmit = (values: Values, {setSubmitting}: FormikHelpers<Values>) => {
