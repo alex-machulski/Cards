@@ -96,8 +96,8 @@ export const logout = (): ThunkType => {
         authAPI.logout()
             .then(response => {
                     if (response.status === 200) {
-                        setAuthUserData(null, null, null, 0,
-                            false, false, "", null)
+                        dispatch( setAuthUserData(null, null, null, 0,
+                            false, false, "", null))
                     }
                 }
         )
