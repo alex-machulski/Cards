@@ -32,13 +32,13 @@ export type MeResponseType = {
     _id: string; // айдишник пользователя
     email: string; //мыло пользователя ()
     name: string; // имя поьлзователя
-    avatar?: string; // ссылка на аватар пользователя
     publicCardPacksCount: number; // количество колод
     created: Date; // дата создания пользователя
     updated: Date; // дата обновления пользователя
     isAdmin: boolean; // не работает
     verified: boolean; // подтвердил ли почту ( если восстанавливал пароль, то тру)
     rememberMe: boolean; // запоминать ли пользователя
+    avatar?: string; // ссылка на аватар пользователя
     error?: string;
 }
 

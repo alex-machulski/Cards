@@ -1,30 +1,33 @@
-import {ThunkDispatch} from "redux-thunk";
-import {ActionsType, AppRootStateType, ThunkType} from "./store";
+
+import {ThunkType} from "./store";
 import {authAPI} from "../api/api";
 
 export const SET_USER_DATA = "SET-USER-DATA"
 
 
-type InitialStateType = {
+export type InitialStateLoginType = {
     _id: string | null                  // айдишник пользователя
     email: string | null                //мыло пользователя
-    name: string | null                 // имя поьлзователя
-    avatar?: string | null              // ссылка на аватар пользователя
+    name: string | null                 // имя поьлзователяв
     publicCardPacksCount: number;       // количество колод
     rememberMe: boolean                 // запоминать ли пользователя
+    isLoggedIn: boolean                 // вошел ли пользователь
     error?: string | null
+    avatar?: string            // ссылка на аватар пользователя
+
 }
 //  не делал динамическую типизацию стэйта, чтобы была возможность поставить везде null
-const initialState: InitialStateType = {
+const initialState: InitialStateLoginType = {
+    isLoggedIn: false,
     _id: null,
     email: null,
     name: null,
-    avatar: null,
+    avatar: "",
     publicCardPacksCount: 0,
     rememberMe: false,
     error: null
 }
-export const loginReducer = (state: InitialStateType = initialState, action: LoginReducerActionsType): InitialStateType => {
+export const loginReducer = (state: InitialStateLoginType = initialState, action: LoginReducerActionsType): InitialStateLoginType => {
     switch (action.type) {
         case SET_USER_DATA: {
             return {
@@ -43,11 +46,12 @@ export const setAuthUserData = (
     name: string | null,
     publicCardPacksCount: number,
     rememberMe: boolean,
-    avatar?: string | null,
-    error?: string | null
+    isLoggedIn: boolean,
+    avatar?: string,
+    error?: string | null,
 ) => ({
     type: SET_USER_DATA,
-    payload: {_id, email, name, avatar, publicCardPacksCount, rememberMe, error}
+    payload: {isLoggedIn, _id, email, name, avatar, publicCardPacksCount, rememberMe,error}
 } as const)
 
 
@@ -59,10 +63,12 @@ export const getAuthUserData = (): ThunkType => {
         authAPI.me()
             .then(response => {
                 if (response.status === 200) { // проверка на то, что ответ пришел правильно
-                    let {_id, email, name, publicCardPacksCount, rememberMe, avatar,
-                        error} = response.data// деструктуризация приходящих данных
-                    dispatch(setAuthUserData(_id, email, name, publicCardPacksCount, rememberMe, avatar,
-                        error))
+                    let {
+                        _id, email, name, publicCardPacksCount, rememberMe, avatar,
+                        error
+                    } = response.data// деструктуризация приходящих данных
+                    dispatch(setAuthUserData(_id, email, name, publicCardPacksCount, rememberMe, true,
+                        avatar,error))
                 }
             })
     }
@@ -79,8 +85,6 @@ export const login = (email: string, password: string, rememberMe: boolean): Thu
                 } else {
                     console.log(response)
                     ;
-                    //     let ErrorMessageFromServer = response.data.error.length > 0 ? response.data.error: "some error"
-                    //     dispatch(stopSubmit("login", {_error: ErrorMessageFromServer}));
                 }
             })
     }
@@ -91,13 +95,12 @@ export const logout = (): ThunkType => {
     return (dispatch) => {
         authAPI.logout()
             .then(response => {
-                console.log("санка logout", response.data)
-                debugger
-                if (response.status === 200) {
-                    dispatch(setAuthUserData(null, null, null, 0, false,
-                        null, null));
+                    if (response.status === 200) {
+                        setAuthUserData(null, null, null, 0,
+                            false, false, "", null)
+                    }
                 }
-            })
+        )
     }
 }
 
