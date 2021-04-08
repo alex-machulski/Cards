@@ -1,6 +1,6 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import {loginReducer, LoginReducerActionsType} from "./login-reducer";
-import thunk from "redux-thunk";
+import thunk, {ThunkAction} from "redux-thunk";
 import {profileReducer, ProfileReducerActionsType} from "./profile-reducer";
 import {registerReducer, RegisterReducerActionsType} from "./register-reducer";
 import {recoverReducer, RecoverReducerActionsType} from "./recover-reducer";
@@ -24,6 +24,8 @@ export type ActionsType =
     RecoverReducerActionsType |
     ProfileReducerActionsType |
     AppReducerActionsType
+
+export type ThunkType = ThunkAction<void, AppRootStateType, unknown, ActionsType>
 
 // @ts-ignore
 window.store = store;
