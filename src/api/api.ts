@@ -4,9 +4,9 @@ import axios from "axios";
 const instance = axios.create({
     withCredentials: true, // разрешить запрос на другие серверы
     // путь на локальный сервер
-    baseURL: `http://localhost:7542/2.0/`,
+    //baseURL: `http://localhost:7542/2.0/`,
     // на удаленный сервер хероку
-    // baseURL: `https://neko-back.herokuapp.com/2.0/`,
+    baseURL: `https://neko-back.herokuapp.com/2.0/`,
     headers: {}
 })
 
