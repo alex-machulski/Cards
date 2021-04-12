@@ -1,18 +1,13 @@
 import axios from "axios";
 
-// экземпляр axios , в котором указываются общие свойства
 const instance = axios.create({
-    withCredentials: true, // разрешить запрос на другие серверы
-    // путь на локальный сервер
+    withCredentials: true,
     baseURL: `http://localhost:7542/2.0/`,
-    // на удаленный сервер хероку
     // baseURL: `https://neko-back.herokuapp.com/2.0/`,
     headers: {}
 })
 
-
 export const authAPI = {
-    // проверка на залогиненность
     me() {
         return instance.post<MeResponseType>(`/auth/me`, {})
     },
@@ -35,16 +30,16 @@ export type MeResponseType = {
     token: string
     tokenDeathTime: number
     __v: number
-    _id: string; // айдишник пользователя
-    email: string; //мыло пользователя ()
-    name: string; // имя поьлзователя
-    publicCardPacksCount: number; // количество колод
-    created: Date; // дата создания пользователя
-    updated: Date; // дата обновления пользователя
-    isAdmin: boolean; // не работает
-    verified: boolean; // подтвердил ли почту ( если восстанавливал пароль, то тру)
-    rememberMe: boolean; // запоминать ли пользователя
-    avatar?: string; // ссылка на аватар пользователя
+    _id: string;
+    email: string;
+    name: string;
+    publicCardPacksCount: number; // number of decks
+    created: Date;
+    updated: Date;
+    isAdmin: boolean; // do not work
+    verified: boolean; // confirmed mail (if the password was restored - true)
+    rememberMe: boolean;
+    avatar?: string; // reference to user avatar
     error?: string;
 }
 
@@ -53,11 +48,11 @@ type LoginResponseType = {
     email: string
     name: string
     avatar?: string
-    publicCardPacksCount: number // количество колод
+    publicCardPacksCount: number // number of decks
     created: Date
     updated: Date
     isAdmin: boolean
-    verified: boolean // подтвердил ли почту
+    verified: boolean // confirmed mail
     rememberMe: boolean
     error?: string
 }
